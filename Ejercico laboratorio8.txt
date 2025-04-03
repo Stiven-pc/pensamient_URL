@@ -1,0 +1,76 @@
+print("EJERCICIO #1")
+nt=int(input("numero de array: "))
+n =int(input("ingrese numero de la tabal: "))
+tabla=[]
+
+for i in range (1, 1+n):
+    mult= i*n
+    tabla.append(mult)
+    print(f"{i} * {n} = {mult}")
+    
+print(tabla)
+print("" * 2)
+
+print("EJERCICIO #2")
+n = int(input("ingrese el numero de nombres: "))
+nombres=[]
+longitudes=[]
+
+for i in range(n):
+    nombre =input(f"ingrese el nombre{i + 1}: ")
+    nombres.append(nombre)
+    longitudes.append(len(nombre))
+    
+print("\n Nombres y sus longitudes: ")
+for i in range (n):
+    print(f"{nombres[i]} - {longitudes[i]}caracteres")
+
+
+print("ESCENARIO")
+n = int(input("Ingrese el número de clientes atendidos: "))
+
+evaluaciones = []
+
+for i in range(n):
+    while True:
+        try:
+            evaluacion = int(input(f"Cliente {i+1}, calificación (1-5): "))
+            if 1 <= evaluacion <= 5:
+                evaluaciones.append(evaluacion)
+                break
+            else:
+                print("Por favor, ingrese un número entre 1 y 5.")
+        except ValueError:
+            print("Entrada inválida. Ingrese un número entero entre 1 y 5.")
+
+conteo = {}
+for e in evaluaciones:
+    if e in conteo:
+        conteo[e] += 1
+    else:
+        conteo[e] = 1
+
+print("\nRespuestas:")
+print(f"Excelente (5): {conteo.get(5, 0)}")
+print(f"Muy Buena (4): {conteo.get(4, 0)}")
+print(f"Buena (3): {conteo.get(3, 0)}")
+print(f"Regular (2): {conteo.get(2, 0)}")
+print(f"Malo (1): {conteo.get(1, 0)}")
+
+max_frecuencia = 0
+respuesta_mas_frecuente = None
+for clave, valor in conteo.items():
+    if valor > max_frecuencia:
+        max_frecuencia = valor
+        respuesta_mas_frecuente = clave
+print(f"\nMás frecuente: {respuesta_mas_frecuente}")
+
+def calcular_promedio(lista):
+    return sum(lista) / len(lista) if lista else 0
+
+promedio = calcular_promedio(evaluaciones)
+print(f"Promedio: {promedio:.2f}")
+
+menores_al_promedio = [i+1 for i in range(n) if evaluaciones[i] < promedio]
+porcentaje_menor = (len(menores_al_promedio) / n) * 100
+print(f"Porcentaje menor al promedio: {porcentaje_menor:.2f}%")
